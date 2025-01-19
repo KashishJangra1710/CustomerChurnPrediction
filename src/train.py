@@ -63,7 +63,7 @@ def evaluate(testX, testY, model):
     fpr, tpr, thresholds = roc_curve(testY, probsY)
     roc_auc = roc_auc_score(testY, probsY)
     plt.plot(fpr, tpr, label=f"AUC: {roc_auc:.2f}")
-    plt.plot([0,0],[1,1],color='red')
+    plt.plot([0,1],[0,1],color='red')
     plt.xlabel("False Positive Rate")
     plt.ylabel("True Positive Rate")
     plt.title("ROC-AUC Curve")
