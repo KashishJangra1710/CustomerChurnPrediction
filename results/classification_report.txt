@@ -9,6 +9,3 @@ Classification Report:
    macro avg       0.95      0.93      0.93    101042
 weighted avg       0.94      0.94      0.93    101042
 
-Confusion Matrix:
- [[38619  6400]
- [   99 55924]]

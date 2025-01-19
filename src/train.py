@@ -1,10 +1,11 @@
 import pandas as pd 
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix, roc_auc_score, roc_curve, ConfusionMatrixDisplay
 import joblib
 
 # Function for Model Training
@@ -40,14 +41,44 @@ def train(trainX, trainY):
 def evaluate(testX, testY, model):
     """Predict using the trained and saved model, calculate evaluation metrics and save them"""
     predY = model.predict(testX)
+    probsY = model.predict_proba(testX)[:,1]
+
+    # CLASSIFICATION REPORT & ACCURACY
+    cr = classification_report(testY, predY)
     accuracy = accuracy_score(testY, predY)
-    class_report = classification_report(testY, predY) 
-    conf_matrix = confusion_matrix(testY, predY) 
-    with open("results/metrics.txt", 'w') as file:
+    with open("results/classification_report.txt", 'w') as file:
         file.write(f"Accuracy Score: {accuracy}\n")
-        file.write(f"Classification Report:\n {class_report}\n")
-        file.write(f"Confusion Matrix:\n {conf_matrix}") 
-    print(f"Model Accuracy: {accuracy}") 
+        file.write(f"Classification Report:\n {cr}\n")
+    print(f"Model Accuracy: {accuracy}")
+
+    # CONFUSION MATRIX
+    cm = confusion_matrix(testY, predY)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    fig, ax = plt.subplots(figsize=(6, 6)) 
+    disp.plot(cmap='Blues', ax=ax)
+    plt.savefig("results/confusion_matrix.png", format="png", dpi=300)
+    plt.close()
+
+    # ROC-AUC CURVE
+    fpr, tpr, thresholds = roc_curve(testY, probsY)
+    roc_auc = roc_auc_score(testY, probsY)
+    plt.plot(fpr, tpr, label=f"AUC: {roc_auc:.2f}")
+    plt.plot([0,0],[1,1],color='red')
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+    plt.title("ROC-AUC Curve")
+    plt.legend()
+    plt.grid()
+    plt.savefig("results/roc_auc_curve.png", format="png", dpi=300)
+    plt.close()
+
+    # PROBABILITY DISTRIBUTION
+    plt.hist(probsY, histtype='step')
+    plt.xlabel("Probabilities")
+    plt.title("Probabilities distribution")
+    plt.grid()
+    plt.savefig("results/probabilities_distribution.png", format="png", dpi=300)
+    plt.close() 
 
 if __name__=='__main__':
     # Loading Cleaned data
