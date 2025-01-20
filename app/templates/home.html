@@ -63,6 +63,19 @@
         button:hover {
             background-color: #0056b3;
         }
+        .result {
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            padding: 10px;
+            margin: 10px 0px;
+        }
+        .no-churn {
+            background-color: rgb(90, 156, 242);
+        }
+        .churn {
+            background-color: rgb(237 99 99);
+        }
     </style>
 </head>
 <body>
@@ -70,7 +83,19 @@
         <h1>Customer Churn Prediction</h1>
         <p><i>"Data-driven insights to keep your customers close"</i></p>
     </div>
-    <form action="/submit" method="get">
+
+    {% if churn is not none %}
+    <h2>Prediction Results</h2>
+    <div class="result {% if churn == 1 %}churn{% else %}no-churn{% endif %}">
+        {% if churn == 1 %}
+        Customer is likely to Churn with probability {{ probability }}%
+        {% else %}
+        Customer is not likely to churn with probability: {{ probability }}%
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <form action="/submit" method="post">
         <!-- Demographic Information -->
         <div class="section">
             <h3>Demographic Information</h3>
@@ -108,23 +133,24 @@
         <!-- Behavioral Information -->
         <div class="section">
             <h3>Behavioral Information</h3>
-            <label for="total-spend">Total Spend</label>
-            <input type="number" id="total-spend" name="total_spend" required>
+            <label for="total_spend">Total Spend</label>
+            <input type="number" id="total_spend" name="total_spend" step="0.001" required>
 
-            <label for="last-interaction">Last Interaction <i>(in days)</i></label>
-            <input type="number" id="last-interaction" name="last_interaction" min="1" max="30" required>
+            <label for="last_interaction">Last Interaction <i>(in days)</i></label>
+            <input type="number" id="last_interaction" name="last_interaction" min="1" max="30" required>
 
-            <label for="usage-frequency">Usage Frequency</label>
-            <input type="number" id="usage-frequency" name="usage_frequency" min="1" max="50" required>
+            <label for="usage_frequency">Usage Frequency</label>
+            <input type="number" id="usage_frequency" name="usage_frequency" min="1" max="50" required>
 
-            <label for="support-calls">Support Calls</label>
-            <input type="number" id="support-calls" name="support_calls" min="0" max="10" required>
+            <label for="support_calls">Support Calls</label>
+            <input type="number" id="support_calls" name="support_calls" min="0" max="10" required>
 
-            <label for="payment-delay">Payment Delay  <i>(in days)</i></label>
-            <input type="number" id="payment-delay" name="payment_delay" min="0" max="30" required>
+            <label for="payment_delay">Payment Delay  <i>(in days)</i></label>
+            <input type="number" id="payment_delay" name="payment_delay" min="0" max="30" required>
         </div>
 
         <button type="submit">Submit</button>
     </form>
+
 </body>
 </html>

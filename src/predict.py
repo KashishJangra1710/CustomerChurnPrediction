@@ -1,5 +1,6 @@
 import pandas as pd
 import joblib
+import numpy as np
 
 # Paths to the saved model
 MODEL_PATH = "models/gradient_boost_model.joblib"
@@ -16,7 +17,7 @@ new_customer_data = pd.DataFrame({
         'Contract Length': ['Annual'], 
         'Total Spend': [683.9], 
         'Last Interaction': [12],
-    })
+    }) 
 
 def load_model():
     """Load the trained model"""
@@ -28,13 +29,16 @@ def load_model():
         print(f"Error: {e}")
         exit(1)
 
-def predict(new_data):
+def predict_churn(new_data):
     """Preprocess the data and make predictions."""
     model= load_model()
     predictions = model.predict(new_data) 
-    return predictions
+    probability = model.predict_proba(new_data)
+    return predictions, probability
 
 if __name__ == "__main__":
-    results = predict(new_customer_data)
-    print("Prediction Results:")
-    print("Churn" if results[0] else "No Churn") 
+    pred, prob = predict_churn(new_customer_data)
+    result = "Churn" if pred else "No Churn"
+    prob = prob[0, 1] if pred else prob[0, 0]
+    statement = f"{result} with probability {np.round(prob*100, 4)}%"
+    print(statement) 
