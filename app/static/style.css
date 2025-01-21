@@ -1,0 +1,190 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.header {
+    background-color: #131d6d; /* Blue color */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+}
+.header a:hover {
+    text-decoration: underline;
+}
+
+.background {
+position: relative;
+width: 100%;
+height: 70vh; /* Set the height for the image section */
+overflow: hidden;
+}
+
+.background img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.background .overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.6); /* Black overlay with 50% opacity */
+z-index: 1;
+}
+
+.tagline {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;
+color: white;
+z-index: 2; /* Above the overlay */
+width: 80%; /* Adjust width as needed */
+max-width: 1200px; /* Optional: limit the maximum width */
+}
+
+.tagline h1 {
+font-size: 3rem;
+margin: 0;
+word-wrap: break-word; /* Ensure long words break to fit */
+line-height: 1.2; /* Adjust line spacing */
+}
+
+.tagline p {
+font-size: 1.2rem;
+margin: 10px 0 0 0;
+font-style: italic;
+line-height: 1.5;
+}
+
+.form-header {
+margin-top: 2rem; /* Space below the image */
+text-align: center;
+}
+
+.headline {
+color: #2f3eb1; /* Eye-catching blue */
+font-size: 2rem; /* Larger font for emphasis */
+font-weight: bold;
+margin: 0; /* Remove extra margin */
+}
+
+.subheadline {
+color: black; /* Vibrant red for contrast */
+font-size: 1.5rem; /* Slightly smaller font */
+margin-top: 0.5rem; /* Space below the main headline */
+font-style: italic; /* Italic for a softer touch */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+form {
+    max-width: 60vw;
+    margin: 0 auto;
+}
+.form-fill {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 5px;
+}
+.section {
+    padding: 15px;
+}
+.section h3 {
+    margin-top: 0;
+    color: #2f3eb1;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input, select {
+    width: 96%;
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+}
+.submit-container {
+    text-align: center; /* Centers the button horizontally */
+}
+button {
+    width: 100px;
+    height: 40px;
+    margin: 10px 0px;
+    background-color: #2f3eb1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #5f91c7;
+}
+.result {
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px 0px;
+}
+.no-churn {
+    background-color: rgb(90, 156, 242);
+}
+.churn {
+    background-color: rgb(237 99 99);
+}
+
+.conclusion {
+background-color: #f2f7ff; /* Soft light blue */
+padding: 20px;
+text-align: center;
+border-radius: 8px;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+margin-top: 50px;
+}
+
+.conclusion h3 {
+font-size: 2.5rem; /* Larger font for the heading */
+color: #0066cc; /* A strong blue color */
+font-weight: bold;
+}
+
+.conclusion p {
+font-size: 1.2rem; /* Slightly larger font for the paragraph */
+color: #333; /* Dark gray for better readability */
+font-style: italic;
+margin-top: 10px;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #2f3eb1; /* Same blue color */
+    color: white;
+    padding: 1px 0;
+    text-align: center;
+}
+
+.footer a {
+    color: white;
+    text-decoration: underline;
+    font-size: 16px;
+}
+
+.footer a:hover {
+    color: antiquewhite;
+}
