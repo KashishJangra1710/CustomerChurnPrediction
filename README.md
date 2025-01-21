@@ -66,3 +66,31 @@ Source: https://www.kaggle.com/datasets/muhammadshahidazeem/customer-churn-datas
 - In src folder, there are 3 python files- for data preprocessing (preprocess.py), training model and evaluation (train.py) and prediction (predict.py)
 - Selected model (Gradient Boosting Classifier) is saved in models folder (model.joblib).
 - Evaluation metrics for choosen model are in results folder (metrics.txt).
+
+## Running the Application
+
+To run the Flask app and check the form and prediction functionality, follow these steps:
+
+1. Clone the Repository: 
+   If you haven't already, clone this repository to your local machine:
+   ```bash
+   git clone <https://github.com/KashishJangra1710/CustomerChurnPrediction.git>
+   cd <repository-folder>
+
+2. Set up a virtual environment
+
+3. Install Dependencies: 
+   pip install -r requirements.txt
+
+4. Run the application:
+   cd app
+   python app.py
+
+5. Access the application:
+   Open your web browser and access the application on localhost. 
+
+
+## Application Workflow
+1. Fill out the form with the required input values.
+2. Submit the form to get the churn prediction and probability.
+The results will be displayed dynamically on the same page, styled with conditional formatting.
