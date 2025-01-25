@@ -81,6 +81,7 @@ margin: 0; /* Remove extra margin */
 }
 
 .subheadline {
+text-align: center;
 color: black; /* Vibrant red for contrast */
 font-size: 1.5rem; /* Slightly smaller font */
 margin-top: 0.5rem; /* Space below the main headline */
@@ -91,30 +92,56 @@ h2 {
     text-align: center;
     color: #333;
 }
-form {
+
+.upload_choice {
+    text-align: center;
+    width: fit-content;
+    padding: 0px 20px;
+    margin: 20px auto;
+    font-size: 18px;
+}
+
+.upload_choice div{
+    margin: 0px 5px;
+    display: inline;
+}
+
+.upload_choice button{
+    width: 60px;
+    height: 30px;
+    margin: 10px 0px;
+    background-color: #2f3eb1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.data_form{
     max-width: 60vw;
     margin: 0 auto;
-}
-.form-fill {
+} 
+.data_form .form-fill {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px 5px;
 }
-.section {
+.data_form .section {
     padding: 15px;
 }
-.section h3 {
+.data_form .section h3 {
     margin-top: 0;
     color: #2f3eb1;
 }
-label {
+.data_form label {
     display: block;
-    margin-bottom: 5px;
+    margin: 5px;
 }
-input, select {
+.data_form input, select {
     width: 96%;
     padding: 8px;
     margin: 5px;
+    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
 

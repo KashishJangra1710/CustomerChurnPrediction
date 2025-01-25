@@ -27,10 +27,31 @@ def predict_churn(new_data):
 
 @app.route('/')
 def home():
-    return render_template('home.html', churn=None)
+    return render_template('home.html', churn=None, upload=None)
 
-@app.route('/submit', methods=['POST'])
-def submit():
+@app.route('/choose', methods=['POST'])
+def choose():
+    selected_method = request.form['method']
+    if selected_method == 'upload':
+        return render_template('home.html', churn=None, upload=1) 
+    elif selected_method == 'form':
+        return render_template('home.html', churn=None, upload=0)
+    else:
+        return "Invalid choice", 400
+
+@app.route('/file_submit', methods=['POST'])
+def file_submit():
+    if 'file' not in request.files:
+        return "No file uploaded", 400
+    file = request.files['file']
+    if file.filename == '':
+        return "No selected file", 400
+    if file and file.filename.endswith('.csv'):
+        data = pd.read_csv(file)
+        return "File uploaded and processed successfully"
+
+@app.route('/form_submit', methods=['POST'])
+def form_submit():
     # Retrieve form values
     age = int(request.form.get('age'))
     gender = request.form.get('gender')
@@ -60,6 +81,14 @@ def submit():
     pred, prob = predict_churn(new_customer_data)
     prob = prob[0, 1] if pred else prob[0, 0]
     return render_template('home.html', churn=pred, probability=np.round(prob*100, 2)) 
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 if __name__=='__main__':
     app.run(debug=True) 
