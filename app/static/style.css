@@ -2,27 +2,18 @@ body {
     font-family: Arial, sans-serif;
 }
 .header {
-    background-color: #131d6d; /* Blue color */
+    background-color: #131d6d; 
     color: white;
     padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.header a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 16px;
-}
-.header a:hover {
-    text-decoration: underline;
-}
 
 .background {
 position: relative;
 width: 100%;
-height: 70vh; /* Set the height for the image section */
+height: 63vh; 
 overflow: hidden;
 }
 
@@ -38,7 +29,7 @@ top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background-color: rgba(0, 0, 0, 0.6); /* Black overlay with 50% opacity */
+background-color: rgba(0, 0, 0, 0.6);
 z-index: 1;
 }
 
@@ -49,16 +40,16 @@ left: 50%;
 transform: translate(-50%, -50%);
 text-align: center;
 color: white;
-z-index: 2; /* Above the overlay */
-width: 80%; /* Adjust width as needed */
-max-width: 1200px; /* Optional: limit the maximum width */
+z-index: 2; 
+width: 80%; 
+max-width: 1200px; 
 }
 
 .tagline h1 {
 font-size: 3rem;
 margin: 0;
-word-wrap: break-word; /* Ensure long words break to fit */
-line-height: 1.2; /* Adjust line spacing */
+word-wrap: break-word; 
+line-height: 1.2;
 }
 
 .tagline p {
@@ -69,23 +60,23 @@ line-height: 1.5;
 }
 
 .form-header {
-margin-top: 2rem; /* Space below the image */
+margin-top: 1.5rem; 
 text-align: center;
 }
 
 .headline {
-color: #2f3eb1; /* Eye-catching blue */
-font-size: 2rem; /* Larger font for emphasis */
+color: #2f3eb1; 
+font-size: 2rem; 
 font-weight: bold;
-margin: 0; /* Remove extra margin */
+margin: 0; 
 }
 
 .subheadline {
 text-align: center;
-color: black; /* Vibrant red for contrast */
-font-size: 1.5rem; /* Slightly smaller font */
-margin-top: 0.5rem; /* Space below the main headline */
-font-style: italic; /* Italic for a softer touch */
+color: black; 
+font-size: 1.5rem; 
+margin-top: 0.5rem; 
+font-style: italic; 
 }
 
 h2 {
@@ -147,7 +138,7 @@ h2 {
 
 }
 .submit-container {
-    text-align: center; /* Centers the button horizontally */
+    text-align: center; 
 }
 button {
     width: 100px;
@@ -177,33 +168,37 @@ button:hover {
 }
 
 .conclusion {
-background-color: #f2f7ff; /* Soft light blue */
+background-color: #f2f7ff;
 padding: 20px;
 text-align: center;
 border-radius: 8px;
-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
 margin-top: 50px;
 }
 
 .conclusion h3 {
-font-size: 2.5rem; /* Larger font for the heading */
-color: #0066cc; /* A strong blue color */
+font-size: 2.5rem; 
+color: #0066cc; 
 font-weight: bold;
+margin: 20px 0px 60px 0px;
 }
 
 .conclusion p {
-font-size: 1.2rem; /* Slightly larger font for the paragraph */
-color: #333; /* Dark gray for better readability */
+font-size: 1.2rem; 
+color: #333; 
 font-style: italic;
 margin-top: 10px;
 }
 
 /* Footer Styles */
 .footer {
-    background-color: #2f3eb1; /* Same blue color */
+    background-color: #2f3eb1; 
     color: white;
     padding: 1px 0;
     text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .footer a {

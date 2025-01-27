@@ -9,13 +9,9 @@
 <body>
     <div class="header">
         <h1 style="margin: 0; font-size: 24px;color:white">ChurnShield</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/about">About</a>
-        </nav>
     </div>
 
+    {% if upload is none %}
     <div class="background">
         <img src="https://maxbill.com/wp-content/uploads/2023/10/churn-prediction-model_1-1024x512.jpg" alt="Background Image">
         <div class="overlay"></div>
@@ -25,25 +21,15 @@
         </div>
     </div>
 
-    {% if churn is not none %}
-    <h2>Prediction Results</h2>
-    <div class="result {% if churn == 1 %}churn{% else %}no-churn{% endif %}">
-        {% if churn == 1 %}
-        Customer is likely to Churn with probability {{ probability }}%
-        {% else %}
-        Customer is not likely to churn with probability: {{ probability }}%
-        {% endif %}
-    </div>
-    {% endif %}
-
     <div class="form-header">
         <h2 class="headline">Take the first step in predicting customer churn</h2>
         <h3 class="subheadline">Upload your data or fill out the form!</h3>
     </div>
+    {% endif %}
 
     {% if upload is none %}
     <div>
-    <form action="/choose" method="post" class= 'upload_choice'>
+    <form action="/data" method="post" class= 'upload_choice'>
     <div>
         <label for="upload_method">Upload CSV File</label> 
         <input type="radio" name="method" id="upload_method" value="upload">
@@ -57,18 +43,42 @@
     </div>
     {% endif %}
 
-    {% if upload is not none %}
     {% if upload == 1 %}
+    <div class="form-header">
+        <h3 class="subheadline" style="color: #2f3eb1;">Upload your data!</h3>
+    </div>
     <form action="/file_submit" method="post" class="data_form" id="upload_form" enctype="multipart/form-data">
         <div class="form-fill">
             <div class="section">
                 <label for="file">Upload a CSV file:</label>
                 <input type="file" id="file" name="file" accept=".csv">
                 <button type="submit">Upload</button>
+                <p style="font-size: 13px;"><b>Note: </b>File should be cleaned and should have columns <i>("Age", "Gender", "Tenure", "Usage Frequency", "Support Calls", "Payment Delay", "Subscription Type", "Contract Length", "Total Spend", "Last Interaction")</i></p>
             </div>
         </div>
     </form> 
-    {% else %}
+    {% if download_ready %}
+    <div style="text-align: center;">
+        <h3>Your file is ready. Click below to download!</h3>
+        <a href="/download"><button>Download</button></a>
+    </div> 
+    {% endif %}
+    {% endif %}
+
+    {% if upload == 0 %} 
+    {% if churn is not none %}
+    <h2>Prediction Results</h2>
+    <div class="result {% if churn == 1 %}churn{% else %}no-churn{% endif %}">
+        {% if churn == 1 %}
+        Customer is likely to Churn with probability {{ probability }}%
+        {% else %}
+        Customer is not likely to churn with probability: {{ probability }}%
+        {% endif %}
+    </div>
+    {% endif %}
+    <div class="form-header">
+        <h3 class="subheadline" style="color: #2f3eb1;">Fill out the form!</h3>
+    </div>
     <form action="/form_submit" method="post" class="data_form" id="fill_form">
         <div class="form-fill">
             <div class="section">
@@ -129,11 +139,12 @@
         </div>
     </form> 
     {% endif %}
-    {% endif %}
 
+    {% if upload is none %}
     <div class="conclusion">
         <h3>Thank You for visiting ChurnShield!</h3>
     </div>    
+    {% endif %}
 
     <div class="footer">
         <p>Check out the project on GitHub: <a href="https://github.com/KashishJangra1710/CustomerChurnPrediction.git" target="_blank">GitHub Link</a></p>

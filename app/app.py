@@ -1,12 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import pandas as pd
 import numpy as np
 import joblib
+from io import BytesIO
 
 app = Flask(__name__)
 
 # Paths to the saved model
 MODEL_PATH = "models/gradient_boost_model.joblib"
+processed_file = None
 
 def load_model():
     """Load the trained model"""
@@ -27,28 +29,56 @@ def predict_churn(new_data):
 
 @app.route('/')
 def home():
-    return render_template('home.html', churn=None, upload=None)
+    return render_template('home.html', churn=None, upload=None, download_ready=False)
 
-@app.route('/choose', methods=['POST'])
+@app.route('/data', methods=['POST'])
 def choose():
     selected_method = request.form['method']
     if selected_method == 'upload':
-        return render_template('home.html', churn=None, upload=1) 
+        return render_template('home.html', churn=None, upload=1, download_ready=False) 
     elif selected_method == 'form':
-        return render_template('home.html', churn=None, upload=0)
+        return render_template('home.html', churn=None, upload=0, download_ready=False)
     else:
         return "Invalid choice", 400
 
 @app.route('/file_submit', methods=['POST'])
 def file_submit():
+    global processed_file
+
     if 'file' not in request.files:
         return "No file uploaded", 400
     file = request.files['file']
     if file.filename == '':
         return "No selected file", 400
     if file and file.filename.endswith('.csv'):
-        data = pd.read_csv(file)
-        return "File uploaded and processed successfully"
+        my_file = request.files['file']
+        data = pd.read_csv(my_file)
+
+        required_columns = ["Age", "Gender", "Tenure", "Usage Frequency", 
+                            "Support Calls", "Payment Delay", 
+                            "Subscription Type", "Contract Length", 
+                            "Total Spend", "Last Interaction"]
+        
+        if not all(col in data.columns for col in required_columns):
+            return "Missing required columns in the uploaded file.", 400
+        
+        predictions, probabilities = predict_churn(data)
+        data['Churn Prediction'] = predictions
+        data['Churn Probability'] = np.round(probabilities[:, 1] * 100, 2)
+        
+        processed_file = BytesIO()
+        data.to_csv(processed_file, index=False)
+        processed_file.seek(0)
+        return render_template('home.html', churn=None, upload=1, download_ready=True) 
+    else:
+        return "Invalid file type. Please upload a CSV file.", 400
+    
+@app.route('/download')
+def download_file():
+    global processed_file
+    if processed_file is None:
+        return "No file processed yet.", 400
+    return send_file(processed_file, as_attachment=True, download_name='processed_file.csv', mimetype='text/csv')
 
 @app.route('/form_submit', methods=['POST'])
 def form_submit():
@@ -80,15 +110,7 @@ def form_submit():
     
     pred, prob = predict_churn(new_customer_data)
     prob = prob[0, 1] if pred else prob[0, 0]
-    return render_template('home.html', churn=pred, probability=np.round(prob*100, 2)) 
-
-@app.route('/dashboard')
-def dashboard():
-    return render_template('dashboard.html')
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
+    return render_template('home.html', churn=pred, upload=0 ,probability=np.round(prob*100, 2), download_ready=False) 
 
 if __name__=='__main__':
     app.run(debug=True) 
