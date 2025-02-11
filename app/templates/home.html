@@ -79,65 +79,67 @@
     <div class="form-header">
         <h3 class="subheadline" style="color: #2f3eb1;">Fill out the form!</h3>
     </div>
-    <form action="/form_submit" method="post" class="data_form" id="fill_form">
-        <div class="form-fill">
-            <div class="section">
-                <h3>Demographic Information</h3>
-                <label for="age">Age <i>(18-70 years)</i></label>
-                <input type="number" id="age" name="age" min="18" max="70" required>
-            
-                <label for="gender">Gender</label>
-                <select id="gender" name="gender" required>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
+    <div class="form-div">
+        <form action="/form_submit" method="post" class="data_form" id="fill_form">
+            <div class="form-fill">
+                <div class="section">
+                    <h3>Demographic Information</h3>
+                    <label for="age">Age <i>(18-70 years)</i></label>
+                    <input type="number" id="age" name="age" min="18" max="70" required>
+                
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+                <!-- Account Information -->
+                <div class="section">
+                    <h3>Account Information</h3>
+                    <label for="tenure">Tenure</label>
+                    <input type="number" id="tenure" name="tenure" min="1" max="60" required>
+
+                    <label for="subscription">Subscription Type</label>
+                    <select id="subscription" name="subscription" required>
+                        <option value="Basic">Basic</option>
+                        <option value="Standard">Standard</option>
+                        <option value="Premium">Premium</option>
+                    </select>
+
+                    <label for="contract">Contract Length</label>
+                    <select id="contract" name="contract" required>
+                        <option value="Annual">Annual</option>
+                        <option value="Quarterly">Quarterly</option>
+                        <option value="Monthly">Monthly</option>
+                    </select>
+                </div>
+
+                <!-- Behavioral Information -->
+                <div class="section">
+                    <h3>Behavioral Information</h3>
+                    <label for="total_spend">Total Spend</label>
+                    <input type="number" id="total_spend" name="total_spend" step="0.001" required>
+
+                    <label for="last_interaction">Last Interaction <i>(in days) </i></label>
+                    <input type="number" id="last_interaction" name="last_interaction" min="1" max="30" required>
+
+                    <label for="usage_frequency">Usage Frequency</label>
+                    <input type="number" id="usage_frequency" name="usage_frequency" min="1" max="50" required>
+
+                    <label for="support_calls">Support Calls</label>
+                    <input type="number" id="support_calls" name="support_calls" min="0" max="10" required>
+
+                    <label for="payment_delay">Payment Delay  <i>(in days)</i></label>
+                    <input type="number" id="payment_delay" name="payment_delay" min="0" max="30" required>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit">Submit</button>
+                </div>
             </div>
-
-            <!-- Account Information -->
-            <div class="section">
-                <h3>Account Information</h3>
-                <label for="tenure">Tenure</label>
-                <input type="number" id="tenure" name="tenure" min="1" max="60" required>
-
-                <label for="subscription">Subscription Type</label>
-                <select id="subscription" name="subscription" required>
-                    <option value="Basic">Basic</option>
-                    <option value="Standard">Standard</option>
-                    <option value="Premium">Premium</option>
-                </select>
-
-                <label for="contract">Contract Length</label>
-                <select id="contract" name="contract" required>
-                    <option value="Annual">Annual</option>
-                    <option value="Quarterly">Quarterly</option>
-                    <option value="Monthly">Monthly</option>
-                </select>
-            </div>
-
-            <!-- Behavioral Information -->
-            <div class="section">
-                <h3>Behavioral Information</h3>
-                <label for="total_spend">Total Spend</label>
-                <input type="number" id="total_spend" name="total_spend" step="0.001" required>
-
-                <label for="last_interaction">Last Interaction <i>(in days) </i></label>
-                <input type="number" id="last_interaction" name="last_interaction" min="1" max="30" required>
-
-                <label for="usage_frequency">Usage Frequency</label>
-                <input type="number" id="usage_frequency" name="usage_frequency" min="1" max="50" required>
-
-                <label for="support_calls">Support Calls</label>
-                <input type="number" id="support_calls" name="support_calls" min="0" max="10" required>
-
-                <label for="payment_delay">Payment Delay  <i>(in days)</i></label>
-                <input type="number" id="payment_delay" name="payment_delay" min="0" max="30" required>
-            </div>
-
-            <div class="submit-container">
-                <button type="submit">Submit</button>
-            </div>
-        </div>
-    </form> 
+        </form> 
+    </div>
     {% endif %}
 
     {% if upload is none %}

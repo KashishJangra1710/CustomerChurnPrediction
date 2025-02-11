@@ -108,6 +108,10 @@ h2 {
     cursor: pointer;
 }
 
+.form-div{
+    margin-bottom: 100px;
+}
+
 .data_form{
     max-width: 60vw;
     margin: 0 auto;
